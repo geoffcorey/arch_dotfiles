@@ -1,0 +1,10 @@
+#!/bin/sh
+docker images |grep -v REPOSITORY|awk '{print $1}'|xargs -L1 docker pull
+cd /mnt/data1/docker
+docker-compose down
+cd ..
+rsync -avu docker /apps
+cd docker
+docker-compose up -d
+#cd /apps
+#rsync -avu Music /mnt/data1
